@@ -428,7 +428,7 @@ Tridecacene”, *Angewandte Chemie* **136** (9), e202317091 (2024);
 H., M. Telychko, J. Li, M. Kumar, J. Brabec, L. Veis, J. Wu, P. Jelinek,
 J. Lu, “Highly-Entangled Polyradical Nanographene with Coexisting Strong
 Correlation and Topological Frustration”, *Nature Chemistry* **16** (6),
-938-944 (2024);
+pp. 938-944 (2024);
 [DOI:10.1038/s41557-024-01453-9](https://dx.doi.org/10.1038/s41557-024-01453-9)
 
 136\) H. Helal, J. Firoz, J. A. Bilbrey, H. Sprueill, K. M. Herman, M.
