@@ -1,0 +1,47 @@
+name: spec-wiki md to html conversion
+on:
+  push:
+  release:
+  schedule:
+    - cron: '0 0 * * *'
+  repository_dispatch:
+    types: [backend_automation]
+  workflow_dispatch:
+jobs:
+  md2html:
+    if: |
+      github.event_name == 'schedule' ||
+      (!contains(github.event.head_commit.message, 'ci skip'))
+    runs-on: [ubuntu-latest]
+#    permissions:
+#      contents: read
+#      pull-requests: write
+    steps:
+      - name: Checkout spec-wiki
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: install pandoc
+        shell: bash
+        run: |
+          sudo apt-get install -y pandoc
+      - name: convert
+        run: |
+          pandoc -t html -f gfm pub_wiki.md -o pub_wiki.html
+          cat pub_wiki.html
+      - name: Commit files
+        run: |
+          #git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          #git config --local user.name "github-actions[bot]"
+          git config --global user.email "${{ github.repository_owner_id }}+${{ github.repository_owner }}@users.noreply.github.com"
+          git config --local user.name $GITHUB_REPOSITORY_OWNER
+          git add  pub_wiki.html ||true
+          git commit  -m "publication changes" pub_wiki.html
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      
+
